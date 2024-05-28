@@ -52,24 +52,50 @@ function CalculatorUI() {
       const currentDisplay = currentInputedValue + key + "";
       inputRef.current.value = currentDisplay;
     } else if (isSymbol !== false) {
-     
       let calculation;
-      if (currentSymbol === "+") {
+      if (currentSymbol === "+" && preValue !== 0) {
         calculation = preValue + parseFloat(currentInputedValue);
-      } else if (currentSymbol === "-") {
+      } else if (currentSymbol === "-" && preValue !== 0) {
         calculation = preValue - parseFloat(currentInputedValue);
-      } else if (currentSymbol === "*") {
+      } else if (currentSymbol === "*" && preValue !== 0) {
         calculation = preValue * parseFloat(currentInputedValue);
-      } else if(currentSymbol === ""){
+      } else if (currentSymbol === "/" && preValue !== 0) {
         calculation = preValue / parseFloat(currentInputedValue);
+      } else {
+        calculation = parseFloat(currentInputedValue);
       }
 
       setPreValue(calculation);
       setCurrentSymbol(key);
       inputRef.current.value = "";
       setResult(calculation);
-      console.log(isNumber, isSymbol, preValue);
+    } else if (key === "C") {
+      inputRef.current.value = "";
+      setPreValue(0);
+      setCurrentSymbol("");
+      setResult(0);
+    } else if (key === "=") {
+      let calculation;
+      if (currentSymbol === "+" && preValue !== 0) {
+        calculation = preValue + parseFloat(currentInputedValue);
+      } else if (currentSymbol === "-" && preValue !== 0) {
+        calculation = preValue - parseFloat(currentInputedValue);
+      } else if (currentSymbol === "*" && preValue !== 0) {
+        calculation = preValue * parseFloat(currentInputedValue);
+      } else if (currentSymbol === "/" && preValue !== 0) {
+        calculation = preValue / parseFloat(currentInputedValue);
+      } else {
+        calculation = parseFloat(currentInputedValue);
+      }
+      inputRef.current.value = calculation;
+      setPreValue(0);
+      setCurrentSymbol("");
+      setResult(calculation);
+    } else if (key === "+/-") {
+      const currentValue = parseFloat(currentInputedValue) * -1;
+      inputRef.current.value = currentValue;
     }
+    
     // const currentValue = oldValue + key;
     // inputRef.current.value = currentValue;
   };
