@@ -7,8 +7,8 @@ function CalculatorUI() {
   const [preValue, setPreValue] = useState(0);
   const [result, setResult] = useState(0);
   const buttonNumberAndIcon = [
+    "AC",
     "C",
-    "()",
     "%",
     "/",
     "7",
@@ -69,7 +69,7 @@ function CalculatorUI() {
       setCurrentSymbol(key);
       inputRef.current.value = "";
       setResult(calculation);
-    } else if (key === "C") {
+    } else if (key === "C" || key === "AC") {
       inputRef.current.value = "";
       setPreValue(0);
       setCurrentSymbol("");
@@ -94,8 +94,10 @@ function CalculatorUI() {
     } else if (key === "+/-") {
       const currentValue = parseFloat(currentInputedValue) * -1;
       inputRef.current.value = currentValue;
+    } else if (key === "%") {
+      const currentValue = parseFloat(currentInputedValue) / 100;
+      inputRef.current.value = currentValue;
     }
-    
     // const currentValue = oldValue + key;
     // inputRef.current.value = currentValue;
   };

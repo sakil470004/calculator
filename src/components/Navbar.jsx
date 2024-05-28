@@ -35,7 +35,7 @@ const Navbar = () => {
         </div>
         <a className="btn btn-ghost text-xl font-bold">
           {" "}
-          <Link to={"/"}>Shoe Shop</Link>
+          <Link to={"/"}>Calculator</Link>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
